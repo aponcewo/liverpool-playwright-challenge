@@ -29,14 +29,18 @@ export class SearchResultsPage {
     await response;
   }
 
-  async sortBy(option: string): Promise<void> 
-  {
-    await this.sortButton.click();
-    const response=this.waitForSearchResponse();
-    await this.page.getByRole('option',{name:option, exact:true}).click();
-    await response;
-
-  }
+  async sortBy(option: string): Promise<Product[]> {
+  await this.sortButton.click();
+  const response = this.waitForSearchResponse();
+  await this.page.getByRole('option', { name: option, exact: true }).click();
+  const apiResponse = await response;
+  const body = await apiResponse.json();
+  return body.data.records.map((record: any) => ({
+    id: record.productId,
+    name: record.title,
+    price: record.priceInfo?.promoPrice?.price,
+  }));
+}
 
   async getProducts(count: number): Promise<Product[]> {
   const products: Product[] = [];
