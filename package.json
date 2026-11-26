@@ -18,6 +18,6 @@
   "homepage": "https://github.com/aponcewo/liverpool-playwright-challenge#readme",
   "devDependencies": {
     "@playwright/test": "^1.65.1",
-    "@types/node": "^26.6.10"
+    "@types/node": "^26.6.11"
   }
 }

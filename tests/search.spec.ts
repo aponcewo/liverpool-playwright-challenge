@@ -13,6 +13,9 @@ test('search, filter and sort products', async ({ page }) => {
   await homePage.search(testData.searchTerm);
   await resultsPage.filterByColor(testData.color);
   await resultsPage.sortBy(testData.sortOption);
+  const products = await resultsPage.getProducts(testData.productsToExtract);
+  console.table(products);
+  expect(products).toHaveLength(testData.productsToExtract);
 
 
   await expect(page).toHaveURL(/sort=/);
